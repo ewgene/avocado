@@ -1,19 +1,18 @@
 <template>
-  <div class="justify-center flex bg-yellow-300 items-center h-screen">
-    <QuizComponent
-      :type="carouselQuiz.type"
-      :title="carouselQuiz.title"
-      :answers="carouselQuiz.answers"  />
+  <div class="quiz-container" 
+    id="Quiz">
+    <CarouselComponent
+      :title="title"
+      :answers="answers" />
   </div>
 </template>
 
 /* eslint-disable */
 <script>
-
-import { defineComponent } from "vue"
-import QuizComponent from "@/components/Quiz.vue"
-
-const standartQuiz = [ 
+import { defineComponent } from 'vue';
+import CarouselComponent from '@/components/Carousel.vue'
+{
+/*const standartQuiz = [ 
   {
     type: "standart",
     title: "Какого цвета авокадо?",
@@ -125,7 +124,7 @@ const orderQuiz = {
   ]
 }
 
-const carouselQuiz = {
+const carousellQuiz = {
   type: "carousel",
   title: "2  + 2 = ?",
   answers: [
@@ -158,24 +157,48 @@ const carouselQuiz = {
       "is_correct": false
     }
   ]
-}
+}*/}
 export default defineComponent({
-  name: "App",
+  name: "QuizComponent",
   components: {
-    QuizComponent
+    CarouselComponent
   },
+  props: [
+    'type',
+    'title',
+    'answers'
+  ],
 
-  data () {
+  setup(props) {
+    let isCarousel = false
+
+    if(props.type === "carousel") {
+      isCarousel = true    }
+
     return {
-      standartQuiz: standartQuiz,
-      orderQuiz: orderQuiz,
-      carouselQuiz: carouselQuiz
+      isCarousel
     }
   }
+
 })
+
 
 </script>
 
-<style>
-
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
 </style>
